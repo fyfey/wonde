@@ -1,0 +1,13 @@
+{
+    log
+    http_port 8080
+}
+
+localhost {
+    handle /api/* {
+        reverse_proxy http://localhost:80
+    }
+    handle {
+        reverse_proxy http://localhost:5174
+    }
+}

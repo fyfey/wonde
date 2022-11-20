@@ -1,6 +1,9 @@
 import { FC, useEffect, useState } from "react";
+import {
+    PLANNER_CELL_HEIGHT,
+    PLANNER_CELL_HEIGHT_CLASS,
+} from "../../../../config";
 
-import { PLANNER_CELL_HEIGHT } from "../../../../config";
 import { Time } from "../../../../lib/time/time";
 
 interface TimeCellProps {
@@ -20,11 +23,11 @@ export const TimeCell: FC<TimeCellProps> = ({ idx, startTime }) => {
     if (idx % 3 === 0) {
         return (
             <div
-                className={`${PLANNER_CELL_HEIGHT} text-xs text-right relative -top-[7px] right-1`}
+                className={`${PLANNER_CELL_HEIGHT_CLASS} text-xs text-right relative -top-[7px] right-1`}
             >
                 {time?.toString()}
             </div>
         );
     }
-    return <div className={PLANNER_CELL_HEIGHT}></div>;
+    return <div className={PLANNER_CELL_HEIGHT_CLASS}></div>;
 };

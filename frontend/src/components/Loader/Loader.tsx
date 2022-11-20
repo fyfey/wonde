@@ -6,7 +6,7 @@ interface LoaderProps {}
 export const Loader: FC<LoaderProps> = () => {
     return (
         <div className="w-full h-full flex justify-center items-center">
-            <FontAwesomeIcon icon={faSpinner} spin size="5x" />
+            <FontAwesomeIcon icon={faSpinner} spin size="3x" />
         </div>
     );
 };
