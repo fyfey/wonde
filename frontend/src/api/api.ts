@@ -1,4 +1,6 @@
 import { BACKEND_URI } from "../config";
+import { ClassesResponse } from "../models/ClassesResponse";
+import { Lesson } from "../models/Lesson";
 import { User } from "../models/User";
 
 export const login = async (
@@ -35,7 +37,7 @@ export const periods = async (): Promise<any> => {
     return res.json();
 };
 
-export const lessons = async (): Promise<any> => {
+export const lessons = async (): Promise<{ lessons: Lesson[] }> => {
     const res = await fetch(`${BACKEND_URI}/api/lessons`);
     return res.json();
 };

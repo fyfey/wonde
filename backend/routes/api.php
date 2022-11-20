@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\LessonsController;
 use App\Http\Controllers\PeriodsController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::middleware(JwtMiddleware::class)->group(function () {
     Route::get('/classes', [ClassesController::class, 'getClasses']);
+    Route::get('/lessons', [LessonsController::class, 'getLessons']);
     Route::get('/periods', [PeriodsController::class, 'periodSchedule']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/deauth', [AuthController::class, 'deauth']);

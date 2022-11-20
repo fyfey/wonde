@@ -21,7 +21,7 @@ export const Login: FC<LoginProps> = () => {
     const navigate = useNavigate();
     const methods = useForm({
         mode: "all",
-        defaultValues: { username: "", password: "" },
+        defaultValues: { username: "jane.darby", password: "" },
         resolver: joiResolver(schema),
     });
     const { user, setUser } = useAuth();
@@ -61,7 +61,7 @@ export const Login: FC<LoginProps> = () => {
             <FormProvider {...methods}>
                 <form
                     onSubmit={handleSubmit(doLogin)}
-                    className="login-form border bg-white p-8 rounded-lg flex flex-col gap-4"
+                    className="login-form border bg-white p-8 rounded-lg flex flex-col gap-4 shadow-sm"
                 >
                     <div className="text-center font-bold flex gap-2 items-center justify-center text-xl mb-6">
                         <FontAwesomeIcon icon={APP_ICON} />
@@ -73,11 +73,12 @@ export const Login: FC<LoginProps> = () => {
                             {error}
                         </div>
                     )}
-                    <Input name="username" placeholder="Username" autoFocus />
+                    <Input name="username" placeholder="Username" />
                     <Input
                         name="password"
                         placeholder="Password"
                         type="password"
+                        autoFocus
                     />
                     <Button
                         type="submit"

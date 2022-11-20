@@ -12,10 +12,8 @@ interface Repo
 
     public function findTeacher(string $teacherId);
 
-    /**
-     * @return \App\Domain\Classs[]
-     */
-    public function findClasses(string $teacherId): array;
+    /** @return \App\Domain\Lesson[] */
+    public function findLessons(string $teacherId, string $after, string $before): array;
 
     public function findPeriods(): array;
 

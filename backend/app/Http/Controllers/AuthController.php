@@ -51,6 +51,7 @@ class AuthController extends Controller
         return ['user' => [
             'id' => $user->id,
             'name' => $user->name,
+            'mis_id' => $user->mis_id,
             'external_id' => $user->exteral_id,
         ]];
     }
