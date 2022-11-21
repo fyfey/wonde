@@ -24,6 +24,11 @@ export const LessonCell: FC<LessonCellProps> = ({ lesson }) => {
     useEffect(() => {
         setDisplayLesson(lesson);
     }, [lesson]);
+
+    const switchLesson = (lesson: Lesson) => {
+        setDisplayLesson(lesson);
+    };
+
     if (!displayLesson) {
         return <Loader />;
     }
