@@ -37,7 +37,18 @@ export const periods = async (): Promise<any> => {
     return res.json();
 };
 
-export const lessons = async (): Promise<{ lessons: Lesson[] }> => {
-    const res = await fetch(`${BACKEND_URI}/api/lessons`);
-    return res.json();
+export const lessons = async (
+    after: string,
+    before: string
+): Promise<Lesson[]> => {
+    const qs = new URLSearchParams({ after, before });
+    const res = await fetch(`${BACKEND_URI}/api/lessons?${qs}`, {});
+    const json = await res.json();
+
+    return json.lessons.map((lesson: any) => ({
+        ...lesson,
+        startAt: new Date(lesson.startAt),
+        endAt: new Date(lesson.endAt),
+        overlapping: [],
+    }));
 };

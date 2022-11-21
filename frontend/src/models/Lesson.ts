@@ -15,6 +15,7 @@ export interface Room {
 }
 export interface Lesson {
     // day number
+    externalId: string;
     day: number;
     name: string;
     description: string;
@@ -23,4 +24,7 @@ export interface Lesson {
     room: Room;
     students: Student[];
     employees: Employee[];
+    offset: number;
+    length: number;
+    overlapping: Lesson[];
 }

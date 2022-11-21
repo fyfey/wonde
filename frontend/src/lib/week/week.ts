@@ -21,14 +21,13 @@ export class Week {
         let d = Week.firstDay(this.date);
         this.month = monthNames[d.getMonth()];
         this.days = [];
-        /**
-         * i = 1 as Sunday is 0, and Monday is _our_ first day of week
-         * Potential to have this as a per-user configuration option.
-         */
         for (let i = 0; i < this.workingDays; i++) {
             this.days.push(new Day(d.getDay(), d.getDate()));
             d = addDays(d, 1);
         }
+    }
+    getDate(): Date {
+        return this.date;
     }
     getDays(): Day[] {
         return this.days;

@@ -60,13 +60,16 @@ class WondeRepo implements Repo
             ->map(function ($class) use ($after, $before) {
                 $fullClass = $this->fullClass($class->id, $after, $before);
                 return collect($fullClass->lessons->data)->flatMap(function ($lesson) use ($fullClass) {
+                    $startDate = Carbon::parse($lesson->start_at->date, $lesson->start_at->timezone);
                     return (new Lesson(
                         $lesson->id,
+                        $this->startTime($startDate),
                         dayNumFromStr($lesson->period->data->day), // set in a sec
                         $fullClass->name,
                         $fullClass->description,
-                        Carbon::parse($lesson->start_at->date, $lesson->start_at->timezone),
+                        $startDate,
                         Carbon::parse($lesson->end_at->date, $lesson->end_at->timezone),
+                        $lesson->period_instance_id,
                         new Room($lesson->room->data->id, $lesson->room->data->name, $lesson->room->data->code),
                         collect($fullClass->students->data)->map(function ($student) {
                             return new Student($student->id, $student->forename, $student->surname);
@@ -97,7 +100,7 @@ class WondeRepo implements Repo
     private function fullClass(string $classId, string $after, string $before)
     {
         $filters = [
-            'lessons_start_afterasdasd' => "${after} 00:00:00",
+            'lessons_start_after' => "${after} 00:00:00",
             'lessons_start_before' => "${before} 00:00:00",
         ];
         $lessons = $this->school->classes->get(
@@ -112,5 +115,10 @@ class WondeRepo implements Repo
             $filters,
         );
         return $lessons;
+    }
+    public function startTime(Carbon $startDate): Carbon
+    {
+        $today = $startDate->format('Y-m-d');
+        return Carbon::parse("{$today} 09:15:00", 'Europe/London');
     }
 }

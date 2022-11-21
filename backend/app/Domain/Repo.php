@@ -2,6 +2,8 @@
 
 namespace App\Domain;
 
+use Illuminate\Support\Carbon;
+
 interface Repo
 {
     public function init();
@@ -18,4 +20,6 @@ interface Repo
     public function findPeriods(): array;
 
     public function findPeriodsLocally(): array;
+
+    public function startTime(Carbon $startDat4): Carbon;
 }
