@@ -21,7 +21,7 @@ export const UserDropdown: FC<UserDropdownProps> = ({ label, onLogout }) => {
                             {label}
                         </Popover.Button>
 
-                        <Popover.Panel className="absolute right-0 z-20 mt-3 max-w-sm transform px-4 sm:px-0 lg:max-w-3xl">
+                        <Popover.Panel className="absolute right-0 z-40 mt-3 max-w-sm transform px-4 sm:px-0 lg:max-w-3xl">
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div className="p-4 bg-white border text-gray-500 hover:text-blue-500">
                                     <div className="flex flex-col">

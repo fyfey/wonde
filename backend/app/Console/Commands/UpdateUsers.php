@@ -32,7 +32,7 @@ class UpdateUsers extends Command
     {
         foreach ($repo->findTeachers() as $employee) {
             $name = strtolower("{$employee->forename}.{$employee->surname}");
-            echo $employee->id.PHP_EOL;
+            echo $employee->id . PHP_EOL;
             $user = User::where('external_id', $employee->id)->first();
             if ($user) {
                 continue;

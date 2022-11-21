@@ -1,5 +1,4 @@
-import { dayNames, monthNames } from "../consts";
-
+import { dayNames } from "../consts";
 import { ordinal } from "../ordinal/ordinal";
 
 export class Day {

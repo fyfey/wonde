@@ -45,11 +45,9 @@ export const AuthProvider: FC<any> = ({ children }) => {
         me()
             .then(
                 (user) => {
-                    console.log("authed!");
                     dispatch({ type: "SET_USER", payload: user });
                 },
                 () => {
-                    console.log("Not authed!");
                     dispatch({ type: "CLEAR_USER" });
                 }
             )

@@ -25,14 +25,20 @@ class Lesson implements Jsonable
     private array $students;
     /** @var $employees Array of Employees in the lesson */
     private array $employees;
+    /** @var $offset int Offset in blocks from srart of day */
+    private int $offset;
+    /** @var $length int Length of lesson in blocks */
+    private int $length;
 
     public function __construct(
         string $externalId,
+        Carbon $dayStartTime,
         int $day,
         string $name,
         string $description,
         Carbon $startAt,
         Carbon $endAt,
+        int $periodInstanceId,
         Room $room,
         array $students,
         array $employees
@@ -43,9 +49,13 @@ class Lesson implements Jsonable
         $this->description = $description;
         $this->startAt = $startAt;
         $this->endAt = $endAt;
+        $this->periodInstanceId = $periodInstanceId;
         $this->room = $room;
         $this->students = $students;
         $this->employees = $employees;
+
+        $this->offset = $dayStartTime->diffInMinutes($startAt) / 5;
+        $this->length = $startAt->diffInMinutes($endAt) / 5;
     }
 
     public function toJson($options = 0)
@@ -57,9 +67,12 @@ class Lesson implements Jsonable
             'description' => $this->description,
             'startAt' => $this->startAt,
             'endAt' => $this->endAt,
+            'periodInstanceId' => $this->periodInstanceId,
             'room' => $this->room,
             'students' => $this->students,
             'employees' => $this->employees,
+            'offset' => $this->offset,
+            'length' => $this->length,
         ];
     }
 }
