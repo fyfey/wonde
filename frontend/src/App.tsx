@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter, defer } from "react-router-dom";
+import { lesson, lessonNotes } from "./api";
 
 import { AuthProvider } from "./auth/AuthContext";
 import { AuthedLayout } from "./components/AuthedLayout";
@@ -6,7 +7,6 @@ import { LessonPage } from "./pages/Lesson";
 import { Login } from "./pages/Login/Login";
 import { Planner } from "./pages/Planner/Planner";
 import { PrivateRoutes } from "./components/PrivateRoutes/PrivateRoutes";
-import { lesson } from "./api";
 
 function App() {
     const router = createBrowserRouter([

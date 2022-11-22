@@ -1,10 +1,10 @@
 import { APP_TITLE, PLANNER_CELL_HEADER_HEIGHT_CLASS } from "../../config";
 import { FC, useEffect, useState } from "react";
+import { addDays, format, isAfter, isBefore, isEqual, parse } from "date-fns";
 import {
     faArrowLeftLong,
     faArrowRightLong,
 } from "@fortawesome/free-solid-svg-icons";
-import { format, isAfter, isBefore, isEqual } from "date-fns";
 import { lessons as lessonsApi, periods as periodsApi } from "../../api";
 
 import { Day } from "../../lib/day/day";
@@ -45,6 +45,17 @@ export const Planner: FC<PlannerProps> = () => {
     const [week, setWeek] = useState(new Week());
     const [loading, setLoading] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        const after = searchParams.get("after");
+        if (after) {
+            setWeek(
+                new Week(addDays(parse(after, "yyyy-MM-dd", new Date()), 2))
+            );
+            return;
+        }
+        setWeek(new Week());
+    }, [searchParams]);
 
     const prev = () => {
         const prevWeek = week.prev();

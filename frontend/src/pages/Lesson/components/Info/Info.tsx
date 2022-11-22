@@ -17,8 +17,10 @@ interface InfoProps {
 }
 export const Info: FC<InfoProps> = ({ lesson }) => {
     return (
-        <div className="area-info bg-white rounded-lg p-8 flex flex-col gap-2 text-lg">
-            <div className="font-bold text-3xl mb-4">Class {lesson.name}</div>
+        <div className="area-info bg-white rounded-lg p-8 flex flex-col gap-2 text-lg shadow-md">
+            <div className="font-bold text-3xl mb-4 text-blue-800">
+                Class {lesson.name}
+            </div>
             <IconInfo icon={faCalendar}>
                 {format(lesson.startAt, "EEEE, do LLLL yyyy")}
             </IconInfo>

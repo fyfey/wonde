@@ -1,5 +1,6 @@
+import { format, parse } from "date-fns";
+
 import { Week } from "./week";
-import { parse } from "date-fns";
 
 describe("week", () => {
     it("first/last", () => {
@@ -31,6 +32,9 @@ describe("week", () => {
 
         expect(prevDays[0].toString()).toBe("Monday 7th");
         expect(prevDays[4].toString()).toBe("Friday 11th");
+        expect(format(Week.firstDay(lastWeek.getDate()), "yyyy-MM-dd")).toBe(
+            "2022-11-07"
+        );
 
         const lastWeekOfMonth = week.next().next();
         const nextDays = lastWeekOfMonth.getDays();

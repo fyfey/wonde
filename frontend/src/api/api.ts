@@ -1,6 +1,7 @@
 import { BACKEND_URI } from "../config";
 import { ClassesResponse } from "../models/ClassesResponse";
 import { Lesson } from "../models/Lesson";
+import { Note } from "../models/Note";
 import { User } from "../models/User";
 
 export const login = async (
@@ -37,6 +38,25 @@ export const periods = async (): Promise<any> => {
     return res.json();
 };
 
+export const lessonNotes = async (lessonId: string): Promise<Note> => {
+    const res = await fetch(`${BACKEND_URI}/api/lessons/${lessonId}/notes`, {});
+    const { note } = await res.json();
+
+    return note;
+};
+export const saveLessonNotes = async (
+    lessonId: string,
+    body: string
+): Promise<Note> => {
+    const res = await fetch(`${BACKEND_URI}/api/lessons/${lessonId}/notes`, {
+        method: "put",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ lessonId, body }),
+    });
+    const { note } = await res.json();
+
+    return note;
+};
 export const lesson = async (id: string): Promise<Lesson> => {
     const res = await fetch(`${BACKEND_URI}/api/lessons/${id}`, {});
     const { lesson } = await res.json();

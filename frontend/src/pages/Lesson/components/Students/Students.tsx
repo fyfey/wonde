@@ -11,26 +11,35 @@ interface StudentsProps {
 }
 export const Students: FC<StudentsProps> = ({ lesson }) => {
     return (
-        <div className="area-students h-full bg-white rounded-lg flex flex-col overflow-y-scroll">
-            <div className="font-bold text-xl p-4 bg-white border-b sticky top-0">
+        <div className="area-students h-full bg-white rounded-lg flex flex-col shadow-md overflow-hidden">
+            <div className="font-bold text-xl p-4 bg-white border-b">
                 Students
             </div>
-            <div className="grid grid-cols-2">
-                <>
-                    <div className="p-2 bg-blue-50 shadow-md sticky top-14 border-b font-bold">
-                        Forename
-                    </div>
-                    <div className="p-2 bg-blue-50 shadow-md sticky top-14 border-b font-bold">
-                        Surname
-                    </div>
-                </>
-                {lesson.students.sort(studentSort).map((student: Student) => (
+            <div className="w-full h-full overflow-y-scroll">
+                <div className="grid grid-cols-2">
                     <>
-                        <div className="p-2 border-b">{student.forename}</div>
-                        <div className="p-2 border-b">{student.surname}</div>
+                        <div className="p-2 px-4 bg-blue-50 shadow-md sticky top-0 border-b font-bold">
+                            Forename
+                        </div>
+                        <div className="p-2 px-4 bg-blue-50 shadow-md sticky top-0 border-b font-bold">
+                            Surname
+                        </div>
                     </>
-                ))}
+                    {lesson.students
+                        .sort(studentSort)
+                        .map((student: Student) => (
+                            <>
+                                <div className="p-2 border-b px-4">
+                                    {student.forename}
+                                </div>
+                                <div className="p-2 border-b px-4">
+                                    {student.surname}
+                                </div>
+                            </>
+                        ))}
+                </div>
             </div>
+            <div className="w-full h-8" />
         </div>
     );
 };

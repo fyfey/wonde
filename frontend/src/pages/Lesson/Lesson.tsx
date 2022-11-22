@@ -1,16 +1,19 @@
 import "./lesson.css";
 
-import { Await, useLoaderData, useParams } from "react-router-dom";
+import { Await, Link, useLoaderData, useParams } from "react-router-dom";
 import { FC, Suspense } from "react";
 import { Lesson, Student } from "../../models/Lesson";
 
 import { APP_TITLE } from "../../config";
+import { Breadcrumb } from "./components/Breadcrumb/Breadcrumb";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet";
 import { Info } from "./components/Info/Info";
 import { Loader } from "../../components";
 import { Notes } from "./components/Notes/Notes";
 import { ServerError } from "../../components/Error/ServerError";
 import { Students } from "./components/Students/Students";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 interface LessonProps {}
 export const LessonPage: FC<LessonProps> = () => {
@@ -32,9 +35,10 @@ export const LessonPage: FC<LessonProps> = () => {
                                 id="lesson-layout"
                                 className="w-full h-full flex items-center justify-center"
                             >
+                                <Breadcrumb lesson={lesson} />
                                 <Info lesson={lesson} />
                                 <Students lesson={lesson} />
-                                <Notes />
+                                <Notes lesson={lesson} />
                             </div>
                         </div>
                     </div>
