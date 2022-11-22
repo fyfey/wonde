@@ -37,6 +37,17 @@ export const periods = async (): Promise<any> => {
     return res.json();
 };
 
+export const lesson = async (id: string): Promise<Lesson> => {
+    const res = await fetch(`${BACKEND_URI}/api/lessons/${id}`, {});
+    const { lesson } = await res.json();
+    return {
+        ...lesson,
+        startAt: new Date(lesson.startAt),
+        endAt: new Date(lesson.endAt),
+        overlapping: [],
+    };
+};
+
 export const lessons = async (
     after: string,
     before: string

@@ -1,6 +1,7 @@
 import {
     FC,
     LegacyRef,
+    MouseEvent,
     MutableRefObject,
     Ref,
     RefObject,
@@ -28,7 +29,7 @@ import { lessons } from "../../../../api";
 
 interface OverlapWarningProps {
     lesson: Lesson;
-    onSwitch: (lesson: Lesson) => void;
+    onSwitch: (e: MouseEvent, lesson: Lesson) => void;
 }
 export const OverlapWarning: FC<OverlapWarningProps> = ({
     lesson,
@@ -36,16 +37,19 @@ export const OverlapWarning: FC<OverlapWarningProps> = ({
 }) => {
     const arrowRef = useRef(null);
     const [open, setOpen] = useState(false);
-    const toggleOpen = useCallback(() => {
-        setOpen((o) => !o);
-    }, [setOpen]);
+    const toggleOpen = useCallback(
+        (e: MouseEvent) => {
+            e.stopPropagation();
+            setOpen((o) => !o);
+        },
+        [setOpen]
+    );
     const {
         context,
         floating,
         reference,
         x,
         y,
-        strategy,
         middlewareData: { arrow: { x: arrowX } = {} },
     } = useFloating({
         placement: "bottom-start",
@@ -73,8 +77,8 @@ export const OverlapWarning: FC<OverlapWarningProps> = ({
         }),
     ]);
 
-    const switchLesson = (lesson: Lesson) => {
-        onSwitch(lesson);
+    const switchLesson = (e: MouseEvent, lesson: Lesson) => {
+        onSwitch(e, lesson);
         setOpen(false);
     };
 
@@ -82,7 +86,7 @@ export const OverlapWarning: FC<OverlapWarningProps> = ({
         <div ref={reference}>
             <button
                 onClick={toggleOpen}
-                className="warning absolute z-40 w-8 h-8 border bg-white rounded-full flex items-center justify-center text-gray-800 shadow-md"
+                className="warning absolute z-40 w-8 h-8 border bg-yellow-300 rounded-full flex items-center justify-center text-gray-800 shadow-md"
             >
                 <FontAwesomeIcon icon={faLayerGroup} />
             </button>
@@ -109,7 +113,7 @@ export const OverlapWarning: FC<OverlapWarningProps> = ({
                         </div>
                         {lesson.overlapping.map((l) => (
                             <div
-                                onClick={() => switchLesson(l)}
+                                onClick={(e) => switchLesson(e, l)}
                                 className="flex gap-4 hover:bg-blue-200 hover:text-blue-500 px-4 py-2 cursor-pointer"
                             >
                                 <div className="w-3" />

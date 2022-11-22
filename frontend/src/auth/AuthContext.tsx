@@ -56,7 +56,7 @@ export const AuthProvider: FC<any> = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ state, dispatch }}>
-            {loading ? <Loader /> : children}
+            {loading ? <Loader label="Loading... 🚀" /> : children}
         </AuthContext.Provider>
     );
 };

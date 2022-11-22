@@ -17,6 +17,8 @@ interface Repo
     /** @return \App\Domain\Lesson[] */
     public function findLessons(string $teacherId, string $after, string $before): array;
 
+    public function findLesson(string $id): Lesson;
+
     public function findPeriods(): array;
 
     public function findPeriodsLocally(): array;
