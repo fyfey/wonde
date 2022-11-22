@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useState } from "react";
+import { FC, MouseEvent, useCallback, useEffect, useState } from "react";
 import {
     faClock,
     faHome,
@@ -37,10 +37,13 @@ export const LessonCell: FC<LessonCellProps> = ({ lesson }) => {
         e.stopPropagation();
         setDisplayLesson(lesson);
     };
-    const showDetail = (e: any) => {
-        e.stopPropagation();
-        navigate(`/lesson/${lesson.externalId}`);
-    };
+    const showDetail = useCallback(
+        (e: any) => {
+            e.stopPropagation();
+            navigate(`/lesson/${displayLesson?.externalId}`);
+        },
+        [displayLesson?.externalId]
+    );
 
     if (!displayLesson) {
         return <Loader />;
@@ -58,7 +61,7 @@ export const LessonCell: FC<LessonCellProps> = ({ lesson }) => {
                 <div
                     ref={reference}
                     onClick={showDetail}
-                    className={`lesson w-full h-full rounded-md bg-blue-200 hover:bg-blue-300 text-slate-500 hover:text-slate-600 cursor-pointer p-4 shadow-md`}
+                    className={`lesson relative w-full h-full rounded-md bg-blue-200 text-slate-500 hover:text-slate-600 cursor-pointer p-4 shadow-md`}
                 >
                     <div className="h-full flex relative flex-col">
                         <div className="flex justify-between">

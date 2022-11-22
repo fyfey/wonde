@@ -19,10 +19,10 @@ export const Button: FC<ButtonProps> = ({
     return (
         <button
             disabled={props.disabled || loading}
-            className={`p-2 bg-blue-400 disabled:bg-blue-200 text-white rounded-md`}
+            className={`p-2 bg-blue-400 disabled:min-w-[75px] disabled:bg-blue-200 text-white rounded-md shadow-sm`}
             {...props}
         >
-            {loading ? <FontAwesomeIcon icon={faSpinner} /> : children}
+            {loading ? <FontAwesomeIcon icon={faSpinner} spin /> : children}
         </button>
     );
 };
