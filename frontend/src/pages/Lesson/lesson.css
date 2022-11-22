@@ -1,0 +1,18 @@
+#lesson-layout {
+    display: grid;
+    grid-template-areas:
+        "info students"
+        "notes students";
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto 1fr;
+    @apply gap-4 max-w-[800px];
+}
+.area-students {
+    grid-area: students;
+}
+.area-info {
+    grid-area: info;
+}
+.area-notes {
+    grid-area: notes;
+}

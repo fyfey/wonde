@@ -1,3 +1,4 @@
+import { APP_TITLE, PLANNER_CELL_HEADER_HEIGHT_CLASS } from "../../config";
 import { FC, useEffect, useState } from "react";
 import {
     faArrowLeftLong,
@@ -8,13 +9,14 @@ import { lessons as lessonsApi, periods as periodsApi } from "../../api";
 
 import { Day } from "../../lib/day/day";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from "react-helmet";
 import { Lesson } from "../../models/Lesson";
 import { LessonCell } from "./components/LessonCell/LessonCell";
 import { LineCell } from "./components/LineCell/LineCell";
 import { Loader } from "../../components";
-import { PLANNER_CELL_HEADER_HEIGHT_CLASS } from "../../config";
 import { TimeCell } from "./components/TimeCell/TimeCell";
 import { Week } from "../../lib/week/week";
+import { useSearchParams } from "react-router-dom";
 
 type LessonsByDay = { [day: number]: Lesson[] };
 const isOverlapping = (lessonA: Lesson, lessonB: Lesson): boolean => {
@@ -42,12 +44,23 @@ export const Planner: FC<PlannerProps> = () => {
     const [lessonsByDay, setLessonsByDay] = useState<LessonsByDay>({});
     const [week, setWeek] = useState(new Week());
     const [loading, setLoading] = useState(true);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const prev = () => {
-        setWeek(week.prev());
+        const prevWeek = week.prev();
+        setWeek(prevWeek);
+        setSearchParams({
+            after: format(Week.firstDay(prevWeek.getDate()), "yyyy-MM-dd"),
+            before: format(Week.lastDay(prevWeek.getDate()), "yyyy-MM-dd"),
+        });
     };
     const next = () => {
-        setWeek(week.next());
+        const nextWeek = week.next();
+        setWeek(nextWeek);
+        setSearchParams({
+            after: format(Week.firstDay(nextWeek.getDate()), "yyyy-MM-dd"),
+            before: format(Week.lastDay(nextWeek.getDate()), "yyyy-MM-dd"),
+        });
     };
 
     useEffect(() => {
@@ -62,8 +75,10 @@ export const Planner: FC<PlannerProps> = () => {
         Promise.allSettled([
             periodsApi().then((p) => setDays(p.days)),
             lessonsApi(
-                format(Week.firstDay(week.getDate()), "yyyy-MM-dd"),
-                format(Week.lastDay(week.getDate()), "yyyy-MM-dd")
+                searchParams.get("after") ??
+                    format(Week.firstDay(week.getDate()), "yyyy-MM-dd"),
+                searchParams.get("before") ??
+                    format(Week.lastDay(week.getDate()), "yyyy-MM-dd")
             )
                 .then((lessons) => {
                     const lessonsByDay: LessonsByDay = {};
@@ -93,13 +108,16 @@ export const Planner: FC<PlannerProps> = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center flex-1">
-                <Loader />
+                <Loader label="Loading lessons for the week..." />
             </div>
         );
     }
 
     return (
         <div>
+            <Helmet>
+                <title>{APP_TITLE} | Planner</title>
+            </Helmet>
             <div className="header flex flex-col sticky top-0 bg-white/70 z-30 shadow-md">
                 <div className="border-b flex justify-evenly w-full h-8 items-center">
                     <div className="flex w-full justify-around text-sm font-bold">

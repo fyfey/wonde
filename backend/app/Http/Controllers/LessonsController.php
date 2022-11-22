@@ -18,4 +18,11 @@ class LessonsController extends Controller
 
         return ['status' => 'OK', 'lessons' => $lessons];
     }
+
+    function getLesson(Repo $repo, string $id)
+    {
+        $lesson = $repo->findLesson($id);
+
+        return ['status' => 'OK', 'lesson' => $lesson->toJson()];
+    }
 }

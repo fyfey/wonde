@@ -12,6 +12,9 @@ export class Time {
             throw new Error("Invalid minute");
         }
     }
+    static fromDate(date: Date) {
+        return new Time(date.getHours(), date.getMinutes());
+    }
     static fromString(string: string) {
         const matches = string.match(TIME_FORMAT);
         if (!matches) {

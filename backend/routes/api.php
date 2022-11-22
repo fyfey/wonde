@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(JwtMiddleware::class)->group(function () {
     Route::get('/classes', [ClassesController::class, 'getClasses']);
     Route::get('/lessons', [LessonsController::class, 'getLessons']);
+    Route::get('/lessons/{id}', [LessonsController::class, 'getLesson']);
     Route::get('/periods', [PeriodsController::class, 'periodSchedule']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/deauth', [AuthController::class, 'deauth']);
