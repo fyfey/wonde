@@ -1,5 +1,4 @@
 import { BACKEND_URI } from "../config";
-import { ClassesResponse } from "../models/ClassesResponse";
 import { Lesson } from "../models/Lesson";
 import { Note } from "../models/Note";
 import { User } from "../models/User";
@@ -28,8 +27,17 @@ export const logout = async () => {
     }
 };
 
+export const demoUsernames = async (): Promise<string[]> => {
+    const res = await fetch(`${BACKEND_URI}/api/demo/usernames`);
+    const { usernames } = await res.json();
+    return usernames;
+};
+
 export const me = async (): Promise<User> => {
     const res = await fetch(`${BACKEND_URI}/api/me`);
+    if (res.status !== 200) {
+        throw new Error("Unauthorised");
+    }
     return res.json();
 };
 

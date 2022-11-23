@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,7 @@ class NoteController extends Controller
 
         sleep(1); // Demo purposes
 
-        return ['note' => $note];
+        return (new JsonResponse(['note' => $note]))->header('Bloom-Response-Ignore', 1);
     }
 
     /**
@@ -64,6 +65,6 @@ class NoteController extends Controller
             ]);
         }
 
-        return ['note' => $note];
+        return (new JsonResponse(['note' => $note]))->header('Bloom-Response-Ignore', 1);
     }
 }

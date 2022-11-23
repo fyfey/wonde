@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('class-planner:init', function () {
+    Artisan::call('migrate:fresh');
+    Artisan::call('class-planner:update-users');
+    Artisan::call('class-planner:update-periods');
+    Artisan::call('class-planner:update-rooms');
+})->describe('Initialising...');

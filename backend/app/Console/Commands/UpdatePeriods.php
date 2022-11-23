@@ -13,7 +13,7 @@ class UpdatePeriods extends Command
      *
      * @var string
      */
-    protected $signature = 'wonde:update-periods';
+    protected $signature = 'class-planner:update-periods';
 
     /**
      * The console command description.

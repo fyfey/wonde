@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\LessonsController;
 use App\Http\Controllers\PeriodsController;
 use App\Http\Controllers\NoteController;
@@ -33,4 +34,5 @@ Route::middleware(JwtMiddleware::class)->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/deauth', [AuthController::class, 'deauth']);
 });
+Route::get('/demo/usernames', [EmployeesController::class, 'getAllUsernames']);
 Route::name('login')->post('/auth', [AuthController::class, 'auth']);

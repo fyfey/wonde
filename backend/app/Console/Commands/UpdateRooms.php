@@ -14,7 +14,7 @@ class UpdateRooms extends Command
      *
      * @var string
      */
-    protected $signature = 'wonde:update-rooms';
+    protected $signature = 'class-planner:update-rooms';
 
     /**
      * The console command description.
