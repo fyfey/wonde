@@ -1,21 +1,8 @@
-export interface Student {
-    externalId: string;
-    forename: string;
-    surname: string;
-}
-export interface Employee {
-    externalId: string;
-    forename: string;
-    surname: string;
-    email?: string;
-    role: "Main Class Teacher" | "Class Teacher";
-}
-export interface Room {
-    name: string;
-    code: string;
-}
+import { Employee } from "./Emplouee";
+import { Room } from "./Room";
+import { Student } from "./Student";
+
 export interface Lesson {
-    // day number
     externalId: string;
     day: number;
     name: string;

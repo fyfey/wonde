@@ -4,6 +4,14 @@ __Story__:
 > As a Teacher I want to be able to see which students are in my class each day
 of the week so that I can be suitably prepared.
 
+# Getting started
+
+```
+npm i
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan class-planner:init
+```
+
 # Dev Log
 
 > I'm adding this section as my git commits map to multiple features.
@@ -23,3 +31,6 @@ I've got a pretty decent "planner" view. I just need to rework my API to return 
 * TODO: cater for mobile users and have the day colums collapse to a single day with prev/next buttons to switch days, and a "month view" button to allow quick selection of week.
 * Updated backend API response for lessons + have the lessons rending on to the planner correctly.
 * Noticed that it's possible to have multiple lessons overlapping.  Added a switcher control to toggle which lesson is "on top"
+* Added lesson detail view to see time, room, employees, students.
+* Added "app" specific feature to save notes against a lesson to help "be prepared".
+* Added username dropdown on login page (for demo purposes)

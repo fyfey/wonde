@@ -14,7 +14,7 @@ class UpdateUsers extends Command
      *
      * @var string
      */
-    protected $signature = 'wonde:update-users';
+    protected $signature = 'class-planner:update-users';
 
     /**
      * The console command description.
