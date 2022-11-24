@@ -15,7 +15,6 @@ composer install
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan class-planner:init
-npm i
 ```
 
 ## Run frontend
