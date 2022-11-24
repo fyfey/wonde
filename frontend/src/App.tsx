@@ -5,6 +5,7 @@ import { AuthProvider } from "./auth/AuthContext";
 import { AuthedLayout } from "./components/AuthedLayout";
 import { LessonPage } from "./pages/Lesson";
 import { Login } from "./pages/Login/Login";
+import { Logout } from "./pages/Logout/Logout";
 import { Planner } from "./pages/Planner/Planner";
 import { PrivateRoutes } from "./components/PrivateRoutes/PrivateRoutes";
 
@@ -32,6 +33,10 @@ function App() {
                                 });
                             },
                             element: <LessonPage />,
+                        },
+                        {
+                            path: "/logout",
+                            element: <Logout />,
                         },
                     ],
                 },

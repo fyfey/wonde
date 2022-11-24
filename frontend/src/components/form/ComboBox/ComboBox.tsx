@@ -53,6 +53,7 @@ export const ComboBox: FC<ComboBoxProps> = ({
                 <div className="relative mt-1">
                     <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
                         <Combobox.Input
+                            {...field}
                             placeholder={placeholder}
                             className={`p-2 border text-base border-gray-100 rounded-md focus:outline-none focus:ring text-gray-500 autofill:!bg-yellow-200 ${className}`}
                             displayValue={(option: SelectOption) =>
@@ -115,7 +116,7 @@ export const ComboBox: FC<ComboBoxProps> = ({
                                                         <FontAwesomeIcon
                                                             className="w-5 h-5"
                                                             icon={faCheck}
-                                                            aria-hideen
+                                                            aria-hidden
                                                         />
                                                     </span>
                                                 ) : null}

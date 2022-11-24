@@ -35,8 +35,6 @@ export const UserDropdown: FC<UserDropdownProps> = ({ label, onLogout }) => {
                                             Logout
                                         </button>
                                     </div>
-
-                                    <img src="/solutions.jpg" alt="" />
                                 </div>
                             </div>
                         </Popover.Panel>

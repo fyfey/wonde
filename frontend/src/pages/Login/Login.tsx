@@ -22,7 +22,7 @@ export const Login: FC<LoginProps> = () => {
     const navigate = useNavigate();
     const methods = useForm({
         mode: "all",
-        defaultValues: { username: "jane.darby", password: "" },
+        defaultValues: { username: "", password: "" },
         resolver: joiResolver(schema),
     });
     const { user, setUser } = useAuth();
@@ -33,11 +33,13 @@ export const Login: FC<LoginProps> = () => {
         demoUsernames().then(setUsernames, console.error);
     }, []);
 
-    if (user.id > 0) {
-        // already logged in!
-        navigate("/planner");
-        return null;
-    }
+    useEffect(() => {
+        if (user && user.id > 0) {
+            // already logged in!
+            navigate("/planner");
+            return;
+        }
+    }, [user]);
 
     const {
         handleSubmit,

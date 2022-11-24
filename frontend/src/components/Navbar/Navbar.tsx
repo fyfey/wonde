@@ -1,15 +1,16 @@
 import { APP_ICON, APP_TITLE } from "../../config";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FC } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 import { UserDropdown } from "./components";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../auth/useAuth";
 
 interface NavbarProps {}
 export const Navbar: FC<NavbarProps> = () => {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
     return (
         <nav className="w-full h-[60px] p-2 bg-slate-900 text-gray-300 flex justify-between">
@@ -23,7 +24,7 @@ export const Navbar: FC<NavbarProps> = () => {
             </div>
             <div>
                 <UserDropdown
-                    onLogout={logout}
+                    onLogout={() => navigate("/logout")}
                     label={
                         <div className="flex gap-2 items-center">
                             <FontAwesomeIcon icon={faUser} />

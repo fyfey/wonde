@@ -9,7 +9,6 @@ export const useAuth = () => {
         state: { user },
         dispatch,
     } = useContext(AuthContext);
-    const navigate = useNavigate();
 
     return {
         user,
@@ -17,7 +16,6 @@ export const useAuth = () => {
         logout: async () => {
             await logout();
             dispatch({ type: "LOGOUT" });
-            navigate("/");
         },
     };
 };
