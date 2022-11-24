@@ -81,12 +81,12 @@ export const Login: FC<LoginProps> = () => {
                         name="username"
                         placeholder="Username"
                         options={usernames.map((u) => ({ label: u, value: u }))}
+                        autoFocus
                     />
                     <Input
                         name="password"
                         placeholder="Password"
                         type="password"
-                        autoFocus
                     />
                     <Button
                         type="submit"

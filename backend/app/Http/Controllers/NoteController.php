@@ -40,8 +40,6 @@ class NoteController extends Controller
         $note->body = $request->get('body') ?: '';
         $note->save();
 
-        sleep(1); // Demo purposes
-
         return (new JsonResponse(['note' => $note]))->header('Bloom-Response-Ignore', 1);
     }
 

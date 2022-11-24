@@ -44,15 +44,6 @@ services:
             test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
             retries: 3
             timeout: 5s
-    bloom:
-        image: valeriansaliou/bloom:1.31
-        networks:
-            - sail
-        ports:
-            - 8081:8080
-            - 8082:8082
-        volumes:
-            - ./bloom.cfg:/etc/bloom.cfg
 
     redis:
         image: redis
