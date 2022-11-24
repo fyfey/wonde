@@ -6,10 +6,37 @@ of the week so that I can be suitably prepared.
 
 # Getting started
 
+## Run backend
 ```
-npm i
+cd backend
+composer install
 ./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan class-planner:init
+npm i
+```
+
+## Run frontend
+```
+cd frontend
+npm i
+npm run dev
+```
+
+## Run reverse proxy
+```
+# allows all services to be run off a single host/port.
+# install caddy to your path. https://caddyserver.com/download
+
+caddy run
+```
+
+## Login
+```
+https://localhost
+
+username is a combobox to allow quick searching of teachers (for demo purposes).
+password is "password1" for all users.
 ```
 
 # Dev Log
@@ -27,9 +54,10 @@ npm i
 * Due to the extra coding involved with using Eloquent and a custom implementation, I've opted to use a cachine proxy [https://github.com/valeriansaliou/bloom](https://github.com/valeriansaliou/bloom). A small footprint API caching proxy that will sit between the frontend I've set it to cache for 10 minutes. It shards on Authorization header so there _shouldn't_ be any chance of cacbhe leakage - It's good enough for this MVP!
 * Ah! You can pass lessons_start_after and lessons_start_before to the `/classes/{id}` endpoint and the `lessons` include will honour it. This is going to cut down on an extra API call per lesson which was going to create an `n + 1` problem.`n + 1` on DB calls is BAD. But when you get sockets and HTTP involved, you've got real problems.
 * add loadng state in to planner. Combine data fetch calls into Promise.all.  Just noticed that react-router-dom 6.4 has just introduced data loading functionality outside of the component. TODO!
-I've got a pretty decent "planner" view. I just need to rework my API to return it from a lessons perspective and add a toolbar at the top of the calendar view to allow changing of weeks.
-* TODO: cater for mobile users and have the day colums collapse to a single day with prev/next buttons to switch days, and a "month view" button to allow quick selection of week.
+* I've now got a pretty decent "planner" view. I just need to rework my API to return it from a lessons perspective and add a toolbar at the top of the calendar view to allow changing of weeks.
 * Updated backend API response for lessons + have the lessons rending on to the planner correctly.
-* Noticed that it's possible to have multiple lessons overlapping.  Added a switcher control to toggle which lesson is "on top"
+* Noticed that it's possible to have multiple lessons overlapping (jane.darby, thurs at 10:15). Added a switcher control to toggle which lesson is "on top"
 * Added lesson detail view to see time, room, employees, students.
 * Added "app" specific feature to save notes against a lesson to help "be prepared".
+* Added username dropdown on login page (for demo purposes)
+* Remove bloom from stack as it was clustering on Authorization header, but we're now using cookie authentication

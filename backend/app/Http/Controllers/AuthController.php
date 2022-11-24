@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Firebase\JWT\JWT;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
@@ -59,6 +61,8 @@ class AuthController extends Controller
     public function deauth()
     {
         Cookie::expire('X-Security-Token');
+
+        return new Response('', 204);
     }
 
     public function me(Request $request)

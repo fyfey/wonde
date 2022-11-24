@@ -15,12 +15,14 @@ type ComboBoxProps = {
     options: SelectOption[];
     className?: string;
     placeholder?: string;
+    autoFocus?: boolean;
 };
 export const ComboBox: FC<ComboBoxProps> = ({
     name,
     options,
     className,
     placeholder,
+    autoFocus = false,
 }) => {
     const { field } = useController({
         name,
@@ -28,10 +30,6 @@ export const ComboBox: FC<ComboBoxProps> = ({
 
     const [selected, setSelected] = useState<any>();
     const [query, setQuery] = useState("");
-
-    useEffect(() => {
-        setSelected(field.value);
-    }, [field.value]);
 
     const filteredOptions =
         query === ""
@@ -61,6 +59,7 @@ export const ComboBox: FC<ComboBoxProps> = ({
                                 option?.label
                             }
                             onChange={(event) => setQuery(event.target.value)}
+                            autoFocus={autoFocus}
                         />
                         <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
                             <div>

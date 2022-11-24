@@ -22,7 +22,7 @@ export const logout = async () => {
     const resp = await fetch(`${BACKEND_URI}/api/deauth`, {
         method: "post",
     });
-    if (resp.status !== 200) {
+    if (resp.status !== 204) {
         throw new Error("Logout failed");
     }
 };
