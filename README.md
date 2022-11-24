@@ -9,6 +9,8 @@
 
 ## Run backend
 
+Update `backend/.env.local` and set `WONDE_API_KEY` to the demo key.
+
 ```
 cd backend
 composer install
